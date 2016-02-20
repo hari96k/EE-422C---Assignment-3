@@ -1,0 +1,4 @@
+ Class to implement shopping cart
+ Solves EE422C progamming assignment #3
+ @author Hari Krishna Kosuru
+ @UT EID hk8663
