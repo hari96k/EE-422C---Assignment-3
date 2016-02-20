@@ -7,7 +7,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.*;
 
-public class ShoppingCartDriver 
+public class Driver 
 	{
 	
 	  public static void main(String[] args) 
