@@ -11,8 +11,9 @@ public class Grocery extends Item
 		perishable = Perishable;
 	}
 
-	
-	//override calculatePrice() if necessary; Implement print methods as necessary	
-	// Only re-implement stuff you cannot get from the superclass (Item)
-	
+	float calculatePrice () {
+		float standardShipping = (float) ((20*weight)*quantity);
+		//final price = ( Premium shipping OR Standard Shipping determined by perishability) 
+		return (float) ( perishable ? 1.2*standardShipping : standardShipping);
+	}
 }

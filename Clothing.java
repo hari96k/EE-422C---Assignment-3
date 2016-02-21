@@ -3,18 +3,16 @@ package Assignment3;
 public class Clothing extends Item 
 {
 
-	// variables, constructors as necessary
-	
-	Clothing(String Name, float Price, int Quantity, double Weight, boolean Shipping)
+	Clothing(String Name, float Price, int Quantity, double Weight)
 	{
-		super(Name, Price, Quantity, Weight, Shipping);
+		super(Name, Price, Quantity, Weight, false);
+		this.calculatePrice();
 	}
 
 	float calculatePrice () 
 	{
-		float final_price = 0;
-		// Insert price calculation here
-		return final_price;
+		//final price =	  Taxes     +  Standard Shipping ) 
+		return (float) (price*1.1 +  (20*weight)*quantity);
 	}
 	
 	void printItemAttributes () 

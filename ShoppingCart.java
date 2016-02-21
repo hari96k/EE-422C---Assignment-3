@@ -1,7 +1,6 @@
 package Assignment3;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 
 public class ShoppingCart 
 {
@@ -11,5 +10,5 @@ public class ShoppingCart
 	{
 		shoppingCart = new ArrayList<Item>();
 	}
-
+	
 }
