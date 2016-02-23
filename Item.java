@@ -5,11 +5,11 @@ public class Item
 	protected String name;
 	protected float price;
 	protected int quantity;
-	protected double weight;
+	protected int weight;
 	protected boolean shipping;
 	
 
-	Item (String Name, float Price, int Quantity, double Weight, boolean Shipping)
+	Item (String Name, float Price, int Quantity, int Weight, boolean Shipping)
 	{		
 		name = Name;
 		price = Price;
@@ -22,7 +22,7 @@ public class Item
 	{
 		float standardShipping = (float) ((20*weight)*quantity);
 		//final price =	  Taxes     +               ( Premium shipping OR Standard Shipping ) 
-		return (float) (price*1.1 + ( shipping ? 1.2*standardShipping : standardShipping));
+		return (float) (price*1.1*quantity + ( shipping ? 1.2*standardShipping : standardShipping));
 	}
 	
 

@@ -5,7 +5,7 @@ public class Grocery extends Item
 	protected boolean perishable;
 
 	
-	Grocery(String Name, float Price, int Quantity, double Weight, boolean Shipping, boolean Perishable) 
+	Grocery(String Name, float Price, int Quantity, int Weight, boolean Shipping, boolean Perishable) 
 	{
 		super(Name, Price, Quantity, Weight, Shipping);
 		perishable = Perishable;
@@ -14,6 +14,6 @@ public class Grocery extends Item
 	float calculatePrice () {
 		float standardShipping = (float) ((20*weight)*quantity);
 		//final price = ( Premium shipping OR Standard Shipping determined by perishability) 
-		return (float) ( perishable ? 1.2*standardShipping : standardShipping);
+		return (float)  ( price*quantity + ( perishable ? 1.2*standardShipping : standardShipping) );
 	}
 }

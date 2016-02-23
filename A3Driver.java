@@ -83,7 +83,8 @@ public class A3Driver {
 	// Check for length of input, invalid actions, etc.
 	public static boolean isInputValid(String[] input) {
 		int length = input.length;
-		switch (input[0]) {
+		String insensitiveAction = input[0].toLowerCase();
+		switch (insensitiveAction) {
 		case "insert":
 			String category = input[1];
 			if (category.matches("groceries")) {
@@ -142,7 +143,7 @@ public class A3Driver {
 		String name = input[2];
 		float price = Float.parseFloat(input[3]);
 		int quantity = Integer.parseInt(input[4]);
-		double weight = Double.parseDouble(input[5]);
+		int weight = Integer.parseInt(input[5]);
 		String state = "";
 		boolean fragile;
 		
@@ -184,7 +185,7 @@ public class A3Driver {
 		String name = input[2];
 		float price = Float.parseFloat(input[3]);
 		int quantity = Integer.parseInt(input[4]);
-		double weight = Double.parseDouble(input[5]);
+		int weight = Integer.parseInt(input[5]);
 		boolean perishable;
 		boolean shipping;
 
@@ -208,7 +209,7 @@ public class A3Driver {
 		String name = input[2];
 		float price = Float.parseFloat(input[3]);
 		int quantity = Integer.parseInt(input[4]);
-		double weight = Double.parseDouble(input[5]);
+		int weight = Integer.parseInt(input[5]);
 
 		Clothing thisClothing = new Clothing(name, price, quantity, weight);
 		cart.shoppingCart.add(thisClothing);
@@ -255,12 +256,25 @@ public class A3Driver {
 
 	// Printing the entire shopping cart
 	public static void print(ShoppingCart cart) {
+		double totalPrice = 0;
 		
 		Collections.sort(cart.shoppingCart, new nameComparator()); // Sort by name
 		
+		System.out.format("\nCurrent Shopping Cart:\n");
+		
+		String leftAlignFormat = "| %-13s | %10.2f     | %5d    | %7d      |  %10.2f     |%n";
+
+		System.out.format("+---------------+----------------+----------+--------------+-----------------+%n");
+		System.out.format("|     Item      |  Item Price($) | Quantity | Weigtht(lbs) |  Total Price($) |%n");
+		System.out.format("+---------------+----------------+----------+--------------+-----------------+%n");
 		for (int i = 0; i < cart.shoppingCart.size(); i++) {
-			System.out.println(cart.shoppingCart.get(i).quantity + " " + cart.shoppingCart.get(i).name + "(s)");
+		    System.out.format(leftAlignFormat, cart.shoppingCart.get(i).name, cart.shoppingCart.get(i).price, cart.shoppingCart.get(i).quantity, cart.shoppingCart.get(i).weight ,cart.shoppingCart.get(i).calculatePrice());
+		    totalPrice = totalPrice + cart.shoppingCart.get(i).calculatePrice();
 		}
+		System.out.format("+---------------+----------------+----------+--------------+-----------------+%n");
+		System.out.format("|                 Total Price of Shopping Cart:  $%-19.2f %8s%n", totalPrice, "|");
+		System.out.format("+----------------------------------------------------------------------------+%n");
+		
 	}
 	
 	public static boolean validState (String state)
