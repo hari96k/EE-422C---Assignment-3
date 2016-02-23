@@ -15,7 +15,7 @@ public class Electronics extends Item
 	float calculatePrice () 
 	{
 		// For tax free states
-		if (state == "TX" || state == "NM" || state == "VA" || state == "AZ" || state == "AK"){
+		if (state.equals("TX") || state.equals("NM") || state.equals("VA") || state.equals("AZ") || state.equals("AK")){
 			float standardShipping = (float) ((20*weight)*quantity);
 			//final price = ( Premium shipping OR Standard Shipping determined by fragility) 
 			return (float) ( fragile ? 1.2*standardShipping : standardShipping);
