@@ -143,15 +143,33 @@ public class A3Driver {
 		float price = Float.parseFloat(input[3]);
 		int quantity = Integer.parseInt(input[4]);
 		double weight = Double.parseDouble(input[5]);
-		String state = input[7];
+		String state = "";
 		boolean fragile;
-
+		
+		if (validState(input[7]))
+		{
+			state = input[7];
+		}
+		
+		else 
+		{
+			System.out.println("Error encountered.");
+			System.out.println("Proceeding to process next transaction ... ");
+			return;
+		}
+		
 		if (input[6].matches("F"))
+		{
 			fragile = true;
+		}
 
 		else if (input[6].matches("NF"))
+		{
 			fragile = false;
-		else {
+		}
+		
+		else 
+		{
 			System.out.println("Error encountered.");
 			System.out.println("Proceeding to process next transaction ... ");
 			return;
@@ -243,5 +261,21 @@ public class A3Driver {
 		for (int i = 0; i < cart.shoppingCart.size(); i++) {
 			System.out.println(cart.shoppingCart.get(i).quantity + " " + cart.shoppingCart.get(i).name + "(s)");
 		}
+	}
+	
+	public static boolean validState (String state)
+	{
+		switch(state)
+		{
+		case "AL": case "AK": case "AZ": case "AR": case "CA": case "CO": case "CT": case "DE": case "FL": case "GA":
+		case "HI": case "ID": case "IL": case "IN": case "IA": case "KS": case "KY": case "ME": case "MD": case "MA":
+		case "LA": case "MI": case "MN": case "MS": case "MO": case "MT": case "NE": case "NV": case "NH": case "NJ":
+		case "NM": case "NY": case "NC": case "ND": case "OH": case "OK": case "OR": case "PA": case "RI": case "SC":
+		case "SD": case "TN": case "TX": case "UT": case "VT": case "VA": case "WA": case "WV": case "WI": case "WY":
+		
+		return true;
+		}
+		
+		return false;
 	}
 }
