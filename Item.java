@@ -4,12 +4,12 @@ public class Item
 {
 	protected String name;
 	protected float price;
-	protected int quantity;
-	protected int weight;
+	protected long quantity;
+	protected long weight;
 	protected boolean shipping;
 	
 
-	Item (String Name, float Price, int Quantity, int Weight, boolean Shipping)
+	Item (String Name, float Price, long Quantity, long Weight, boolean Shipping)
 	{		
 		name = Name;
 		price = Price;

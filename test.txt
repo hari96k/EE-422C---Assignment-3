@@ -1,7 +1,8 @@
 insert clothing   shirt 20.50 1 1
 insert groceries cabbage 2.00 5 1 NP
-insert electronics PS3 300 1 5 F NM
-insert groceries 123132phone 2.00 5 1 NP
+insert electronics PS3 300 1 5 F NM 
+insert electronics PS4 300 500 1 F
+insert groceries 123132phone 2.00 500000000000000 1 NP
 search cabbage
 update cabbage 3
 print

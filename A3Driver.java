@@ -88,21 +88,21 @@ public class A3Driver {
 		case "insert":
 			String category = input[1];
 			if (category.matches("groceries")) {
-				if (length != 7 && length != 8)
+				if (length != 7)
 					return false;
 				if (!input[6].equals("P") && !input[6].equals("NP"))
 					return false;
 
 				return true;
 			} else if (category.matches("electronics")) {
-				if (length != 7 && length != 8)
+				if (length != 8)
 					return false;
 				if (!input[6].equals("F") && !input[6].equals("NF"))
 					return false;
 
 				return true;
 			} else if (category.matches("clothing")) {
-				if (length != 6 && length != 7)
+				if (length != 6)
 					return false;
 
 				return true;
@@ -142,8 +142,8 @@ public class A3Driver {
 		
 		String name = input[2];
 		float price = recoverFloatAmount(input[3]);
-		int quantity = recoverIntAmount(input[4]);
-		int weight = recoverIntAmount(input[5]);
+		long quantity = recoverIntAmount(input[4]);
+		long weight = recoverIntAmount(input[5]);
 		String state = "";
 		boolean fragile;
 		
@@ -191,8 +191,8 @@ public class A3Driver {
 		
 		String name = input[2];
 		float price = recoverFloatAmount(input[3]);
-		int quantity = recoverIntAmount(input[4]);
-		int weight = recoverIntAmount(input[5]);
+		long quantity = recoverIntAmount(input[4]);
+		long weight = recoverIntAmount(input[5]);
 		boolean perishable;
 		boolean shipping;
 		
@@ -222,8 +222,8 @@ public class A3Driver {
 		
 		String name = input[2];
 		float price = recoverFloatAmount(input[3]);
-		int quantity = recoverIntAmount(input[4]);
-		int weight = recoverIntAmount(input[5]);
+		long quantity = recoverIntAmount(input[4]);
+		long weight = recoverIntAmount(input[5]);
 		
 		if (price == -1 || quantity == -1 || weight == -1)
 		{
@@ -239,7 +239,7 @@ public class A3Driver {
 	// Search for the desired item and print results
 	public static void search(String name, ShoppingCart cart) {
 		
-		int searchCount = 0;
+		long searchCount = 0;
 		
 		for (int i = 0; i < cart.shoppingCart.size(); i++) {
 			if (cart.shoppingCart.get(i).name.equals(name)) {
@@ -252,7 +252,7 @@ public class A3Driver {
 	// Delete all instances of the desired item and print results
 	public static void delete(String name, ShoppingCart cart) {
 		
-		int deleteCount = 0;
+		long deleteCount = 0;
 		
 		for (int i = 0; i < cart.shoppingCart.size(); i++) {
 			if (cart.shoppingCart.get(i).name.equals(name)) {
@@ -316,14 +316,14 @@ public class A3Driver {
 	}
 
 	// Convert string to int
-	public static int recoverIntAmount (String amount)
+	public static long recoverIntAmount (String amount)
 	{
 		try 
 		{
 			double result = Double.parseDouble(amount);
 			if ((result % 1) == 0)
 			{
-				return (int)result;
+				return (long)result;
 			}
 			return -1;
 		}

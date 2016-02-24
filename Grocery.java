@@ -5,7 +5,7 @@ public class Grocery extends Item
 	protected boolean perishable;
 
 	
-	Grocery(String Name, float Price, int Quantity, int Weight, boolean Shipping, boolean Perishable) 
+	Grocery(String Name, float Price, long Quantity, long Weight, boolean Shipping, boolean Perishable) 
 	{
 		super(Name, Price, Quantity, Weight, Shipping);
 		perishable = Perishable;

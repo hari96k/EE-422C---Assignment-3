@@ -5,7 +5,7 @@ public class Electronics extends Item
 	protected boolean fragile;
 	protected String state;
 	
-	Electronics(String Name, float Price, int Quantity, int Weight, boolean Fragile, String State) 
+	Electronics(String Name, float Price, long Quantity, long Weight, boolean Fragile, String State) 
 	{
 		super(Name, Price, Quantity, Weight, Fragile);
 		fragile = Fragile;

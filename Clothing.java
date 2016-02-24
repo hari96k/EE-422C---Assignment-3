@@ -3,7 +3,7 @@ package Assignment3;
 public class Clothing extends Item 
 {
 
-	Clothing(String Name, float Price, int Quantity, int Weight)
+	Clothing(String Name, float Price, long Quantity, long Weight)
 	{
 		super(Name, Price, Quantity, Weight, false);
 		this.calculatePrice();
