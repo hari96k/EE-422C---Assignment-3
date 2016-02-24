@@ -141,11 +141,18 @@ public class A3Driver {
 	public static void insertElectronics(String[] input, ShoppingCart cart) {
 		
 		String name = input[2];
-		float price = Float.parseFloat(input[3]);
-		int quantity = Integer.parseInt(input[4]);
-		int weight = Integer.parseInt(input[5]);
+		float price = recoverFloatAmount(input[3]);
+		int quantity = recoverIntAmount(input[4]);
+		int weight = recoverIntAmount(input[5]);
 		String state = "";
 		boolean fragile;
+		
+		if (price == -1 || quantity == -1 || weight == -1)
+		{
+			System.out.println("Error encountered.");
+			System.out.println("Proceeding to process next transaction ... ");
+			return;
+		}
 		
 		if (validState(input[7]))
 		{
@@ -183,12 +190,19 @@ public class A3Driver {
 	public static void insertGroceries(String[] input, ShoppingCart cart) {
 		
 		String name = input[2];
-		float price = Float.parseFloat(input[3]);
-		int quantity = Integer.parseInt(input[4]);
-		int weight = Integer.parseInt(input[5]);
+		float price = recoverFloatAmount(input[3]);
+		int quantity = recoverIntAmount(input[4]);
+		int weight = recoverIntAmount(input[5]);
 		boolean perishable;
 		boolean shipping;
-
+		
+		if (price == -1 || quantity == -1 || weight == -1)
+		{
+			System.out.println("Error encountered.");
+			System.out.println("Proceeding to process next transaction ... ");
+			return;
+		}
+		
 		if (input[6].matches("P")) {
 			perishable = true;
 			shipping = true;
@@ -207,10 +221,17 @@ public class A3Driver {
 	public static void insertClothes(String[] input, ShoppingCart cart) {
 		
 		String name = input[2];
-		float price = Float.parseFloat(input[3]);
-		int quantity = Integer.parseInt(input[4]);
-		int weight = Integer.parseInt(input[5]);
-
+		float price = recoverFloatAmount(input[3]);
+		int quantity = recoverIntAmount(input[4]);
+		int weight = recoverIntAmount(input[5]);
+		
+		if (price == -1 || quantity == -1 || weight == -1)
+		{
+			System.out.println("Error encountered.");
+			System.out.println("Proceeding to process next transaction ... ");
+			return;
+		}
+		
 		Clothing thisClothing = new Clothing(name, price, quantity, weight);
 		cart.shoppingCart.add(thisClothing);
 	}
@@ -277,6 +298,7 @@ public class A3Driver {
 		
 	}
 	
+	// Check validity of entered state
 	public static boolean validState (String state)
 	{
 		switch(state)
@@ -291,5 +313,43 @@ public class A3Driver {
 		}
 		
 		return false;
+	}
+
+	// Convert string to int
+	public static int recoverIntAmount (String amount)
+	{
+		try 
+		{
+			double result = Double.parseDouble(amount);
+			if ((result % 1) == 0)
+			{
+				return (int)result;
+			}
+			return -1;
+		}
+		
+		catch (NumberFormatException nfe)
+		{
+			return -1;
+		}
+	}
+	
+	// Convert string to float
+	public static float recoverFloatAmount (String amount)
+	{
+		try 
+		{
+			float result = Float.parseFloat(amount);
+			if (result >= 0)
+			{
+				return result;
+			}
+			return -1;
+		}
+		
+		catch (NumberFormatException nfe)
+		{
+			return -1;
+		}
 	}
 }
