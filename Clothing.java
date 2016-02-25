@@ -5,20 +5,9 @@ public class Clothing extends Item
 
 	Clothing(String Name, float Price, long Quantity, long Weight)
 	{
+		// No premium shipping for clothes
 		super(Name, Price, Quantity, Weight, false);
-		this.calculatePrice();
 	}
 
-	float calculatePrice () 
-	{
-		//final price =	  Taxes     +  Standard Shipping ) 
-		return (float) (price*1.1 +  (20*weight)*quantity);
-	}
-	
-	void printItemAttributes () 
-	{
-		//Print all applicable attributes of this sub-class
-	}
-	
-
+	//Uses calculatePrice of Item class
 }

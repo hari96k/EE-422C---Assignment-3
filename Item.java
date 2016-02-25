@@ -26,11 +26,6 @@ public class Item
 	}
 	
 
-	void printItemAttributes () 
-	{
-		//Print all applicable attributes of this class
-	}
-	
 	String getName(){
 		return name;
 	}

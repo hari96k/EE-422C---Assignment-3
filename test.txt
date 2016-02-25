@@ -1,6 +1,4 @@
 insert groceries cabbage -0.00 500.000 0.0000 NP
-print
-insert groceries cabbage -0.00 500.000 0.0000 NP
-print
+insert clothing shirt 2 2 2
 print
 search cabbage
