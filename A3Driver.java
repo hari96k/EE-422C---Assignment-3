@@ -37,9 +37,9 @@ public class A3Driver {
 	// Check the validity of the input line
 	// Parse the input line and call the necessary method
 	public static void processInput(String input, ShoppingCart cart) {
-		String[] userInput = input.split("[ ]+"); // Must be able to handle
-													// multiple spaces as well
+		String[] userInput = input.split("[ ]+"); // Must be able to handle multiple spaces as well
 
+		// Check if valid input and perform appropriate action
 		if (isInputValid(userInput)) {
 			switch (userInput[0]) {
 			case "insert":
@@ -62,12 +62,13 @@ public class A3Driver {
 				delete(userInput[1], cart);
 				break;
 			case "update":
-				update(userInput[1], Integer.parseInt(userInput[2]), cart);
+				update(userInput[1], recoverLongAmount(userInput[2]), cart);
 				break;
 			case "print":
 				print(cart);
 				break;
 			default:
+				// If no cases match, then output error msg
 				System.out.println("Error encountered.");
 				System.out.println("Proceeding to process next transaction ... ");
 			}
@@ -142,12 +143,12 @@ public class A3Driver {
 		
 		String name = input[2];
 		float price = recoverFloatAmount(input[3]);
-		long quantity = recoverIntAmount(input[4]);
-		long weight = recoverIntAmount(input[5]);
+		long quantity = recoverLongAmount(input[4]);
+		long weight = recoverLongAmount(input[5]);
 		String state = "";
 		boolean fragile;
 		
-		if (price == -1 || quantity == -1 || weight == -1)
+		if (price < 0 || quantity < 0 || weight < 0)
 		{
 			System.out.println("Error encountered.");
 			System.out.println("Proceeding to process next transaction ... ");
@@ -191,12 +192,12 @@ public class A3Driver {
 		
 		String name = input[2];
 		float price = recoverFloatAmount(input[3]);
-		long quantity = recoverIntAmount(input[4]);
-		long weight = recoverIntAmount(input[5]);
+		long quantity = recoverLongAmount(input[4]);
+		long weight = recoverLongAmount(input[5]);
 		boolean perishable;
 		boolean shipping;
 		
-		if (price == -1 || quantity == -1 || weight == -1)
+		if (price < 0 || quantity < 0 || weight < 0)
 		{
 			System.out.println("Error encountered.");
 			System.out.println("Proceeding to process next transaction ... ");
@@ -222,10 +223,10 @@ public class A3Driver {
 		
 		String name = input[2];
 		float price = recoverFloatAmount(input[3]);
-		long quantity = recoverIntAmount(input[4]);
-		long weight = recoverIntAmount(input[5]);
+		long quantity = recoverLongAmount(input[4]);
+		long weight = recoverLongAmount(input[5]);
 		
-		if (price == -1 || quantity == -1 || weight == -1)
+		if (price < 0 || quantity < 0 || weight < 0)
 		{
 			System.out.println("Error encountered.");
 			System.out.println("Proceeding to process next transaction ... ");
@@ -260,19 +261,31 @@ public class A3Driver {
 				cart.shoppingCart.remove(i);
 			}
 		}
+		if (deleteCount == 0){
+			System.out.println("Error encountered.");
+			System.out.println("Proceeding to process next transaction ... ");
+			return;
+		}
 		System.out.println(deleteCount + " " + name + "(s) deleted");
 	}
 
 	// Update desired item and print results
-	public static void update(String name, int amount, ShoppingCart cart) {
-		
+	public static void update(String name, long amount, ShoppingCart cart) {
+		int numberOfMatches = 0;
 		for (int i = 0; i < cart.shoppingCart.size(); i++) {
-			if (cart.shoppingCart.get(i).name.equals(name)) {
+			// If the name matches and the update amount is >= 0
+			if (cart.shoppingCart.get(i).name.equals(name) && amount >= 0 ) {
 				cart.shoppingCart.get(i).quantity = amount;
+				numberOfMatches++;
 				break;
 			}
-			System.out.println("Quantity of " + name + "(s) updated to: " + amount);
 		}
+		if ((numberOfMatches == 0) || (amount < 0)){
+			System.out.println("Error encountered.");
+			System.out.println("Proceeding to process next transaction ... ");
+			return;
+		}
+		System.out.println("Quantity of " + name + "(s) updated to: " + amount);
 	}
 
 	// Printing the entire shopping cart
@@ -289,7 +302,8 @@ public class A3Driver {
 		System.out.format("|     Item      |  Item Price($) | Quantity | Weigtht(lbs) |  Total Price($) |%n");
 		System.out.format("+---------------+----------------+----------+--------------+-----------------+%n");
 		for (int i = 0; i < cart.shoppingCart.size(); i++) {
-		    System.out.format(leftAlignFormat, cart.shoppingCart.get(i).name, cart.shoppingCart.get(i).price, cart.shoppingCart.get(i).quantity, cart.shoppingCart.get(i).weight ,cart.shoppingCart.get(i).calculatePrice());
+			// Outputs all the attributes (note that the + 0 for price is to account for a price of -0)
+		    System.out.format(leftAlignFormat, cart.shoppingCart.get(i).name, cart.shoppingCart.get(i).price + 0, cart.shoppingCart.get(i).quantity, cart.shoppingCart.get(i).weight ,cart.shoppingCart.get(i).calculatePrice());
 		    totalPrice = totalPrice + cart.shoppingCart.get(i).calculatePrice();
 		}
 		System.out.format("+---------------+----------------+----------+--------------+-----------------+%n");
@@ -315,8 +329,8 @@ public class A3Driver {
 		return false;
 	}
 
-	// Convert string to int
-	public static long recoverIntAmount (String amount)
+	// Convert string to long
+	public static long recoverLongAmount (String amount)
 	{
 		try 
 		{
